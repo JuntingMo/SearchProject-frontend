@@ -13,7 +13,7 @@
         <PostList :post-list="postList" />
       </a-tab-pane>
       <a-tab-pane key="picture" tab="图片">
-        <PictureList></PictureList>
+        <PictureList :picture-list="pictureList"></PictureList>
       </a-tab-pane>
       <a-tab-pane key="user" tab="用户">
         <UserList :user-list="userList" />
@@ -34,19 +34,10 @@ import myAxios from "@/plugins/myAxios";
 //创建一个帖子
 const postList = ref([]);
 
-//引入MyAxios
-myAxios.post("/post/list/page/vo", {}).then((res: any) => {
-  postList.value = res.records;
-});
-
 //创建⽤户列表
 const userList = ref([]);
 
-//引⼊MyAxios;
-myAxios.post("/user/list/page/vo", {}).then((res: any) => {
-  console.log(res);
-  userList.value = res.records;
-});
+const pictureList = ref([]);
 
 const route = useRoute();
 const router = useRouter();
@@ -59,7 +50,34 @@ const initSearchParams = {
   pageNum: 1,
 };
 
+const loadData = (params: any) => {
+  const postQuery = {
+    ...params,
+    searchText: params.text,
+  };
+  myAxios.post("/post/list/page/vo", postQuery).then((res: any) => {
+    postList.value = res.records;
+  });
+  const pictureQuery = {
+    ...params,
+    searchText: params.text,
+  };
+  myAxios.post("/picture/list/page/vo", pictureQuery).then((res: any) => {
+    pictureList.value = res.records;
+  });
+  const userQuery = {
+    ...params,
+    userName: params.text,
+  };
+  myAxios.post("/user/list/page/vo", userQuery).then((res: any) => {
+    userList.value = res.records;
+  });
+};
+
+/*记录搜索关键字*/
 const searchParams = ref(initSearchParams);
+// 首次请求
+loadData(initSearchParams);
 
 watchEffect(() => {
   searchParams.value = {
@@ -69,10 +87,12 @@ watchEffect(() => {
 });
 
 const onSearch = (value: string) => {
-  alert(value);
+  console.log(value);
   router.push({
     query: searchParams.value,
   });
+  // 根据条件查询
+  loadData(searchParams.value);
 };
 
 const onTabChange = (key: string) => {
