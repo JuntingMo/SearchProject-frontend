@@ -55,29 +55,29 @@ const initSearchParams = {
  * @param params
  */
 
-const loadDataOld = (params: any) => {
-  const postQuery = {
-    ...params,
-    searchText: params.text,
-  };
-  myAxios.post("/post/list/page/vo", postQuery).then((res: any) => {
-    postList.value = res.records;
-  });
-  const pictureQuery = {
-    ...params,
-    searchText: params.text,
-  };
-  myAxios.post("/picture/list/page/vo", pictureQuery).then((res: any) => {
-    pictureList.value = res.records;
-  });
-  const userQuery = {
-    ...params,
-    userName: params.text,
-  };
-  myAxios.post("/user/list/page/vo", userQuery).then((res: any) => {
-    userList.value = res.records;
-  });
-};
+// const loadDataOld = (params: any) => {
+//   const postQuery = {
+//     ...params,
+//     searchText: params.text,
+//   };
+//   myAxios.post("/post/list/page/vo", postQuery).then((res: any) => {
+//     postList.value = res.records;
+//   });
+//   const pictureQuery = {
+//     ...params,
+//     searchText: params.text,
+//   };
+//   myAxios.post("/picture/list/page/vo", pictureQuery).then((res: any) => {
+//     pictureList.value = res.records;
+//   });
+//   const userQuery = {
+//     ...params,
+//     userName: params.text,
+//   };
+//   myAxios.post("/user/list/page/vo", userQuery).then((res: any) => {
+//     userList.value = res.records;
+//   });
+// };
 
 /**
  * 聚合搜索后的加载数据格式
