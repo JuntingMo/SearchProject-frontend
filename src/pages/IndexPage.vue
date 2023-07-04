@@ -50,7 +50,12 @@ const initSearchParams = {
   pageNum: 1,
 };
 
-const loadData = (params: any) => {
+/**
+ * 旧的加载数据
+ * @param params
+ */
+
+const loadDataOld = (params: any) => {
   const postQuery = {
     ...params,
     searchText: params.text,
@@ -71,6 +76,22 @@ const loadData = (params: any) => {
   };
   myAxios.post("/user/list/page/vo", userQuery).then((res: any) => {
     userList.value = res.records;
+  });
+};
+
+/**
+ * 加载数据
+ * @param params
+ */
+const loadData = (params: any) => {
+  const query = {
+    ...params,
+    searchText: params.text,
+  };
+  myAxios.post("/search/all", query).then((res: any) => {
+    postList.value = res.postList;
+    userList.value = res.userList;
+    pictureList.value = res.pictureList;
   });
 };
 
