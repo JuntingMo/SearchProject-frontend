@@ -1,7 +1,7 @@
 <template>
   <div class="index-page">
     <a-input-search
-      v-model:value="searchParams.text"
+      v-model:value="searchText"
       placeholder="请输入搜索关键词"
       enter-button="搜索"
       size="large"
@@ -140,7 +140,6 @@ watchEffect(() => {
 });
 
 const onSearch = (value: string) => {
-  console.log(value);
   router.push({
     query: {
       ...searchParams.value,
@@ -148,8 +147,7 @@ const onSearch = (value: string) => {
     },
   });
   // 根据条件查询
-  //loadData(searchParams.value);
-  // alert(value);
+  alert(value);
 };
 
 const onTabChange = (key: string) => {
