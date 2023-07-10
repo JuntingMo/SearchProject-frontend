@@ -25,4 +25,4 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 后端项目地址：https://github.com/JuntingMo/SearchProject
 
-前端项目地址：
+前端项目地址：https://github.com/JuntingMo/SearchProject-frontend
